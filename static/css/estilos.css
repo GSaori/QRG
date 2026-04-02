@@ -1,0 +1,43 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;   /* Tipo de letra */
+    background-color: #f4f4f4;        /* Color de fondo */
+    text-align: center;               /* Centra el texto */
+    margin: 0;                        /* Quita márgenes por defecto */
+    padding: 0;                       /* Quita relleno por defecto */
+}
+
+/* Caja principal donde está el contenido */
+.contenedor {
+    width: 90%;               /* Usa el 90% del ancho disponible */
+    max-width: 500px;         /* Pero no más de 500px */
+    margin: 50px auto;        /* Centra la caja horizontalmente y deja espacio arriba */
+    background: white;        /* Fondo blanco */
+    padding: 30px;            /* Espacio interno */
+    border-radius: 10px;      /* Bordes redondeados */
+}
+
+/* Estilo de la caja de texto */
+input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+/* Estilo del botón */
+button {
+    padding: 10px 20px;
+    cursor: pointer; /* Hace que el cursor cambie al pasar encima */
+}
+
+/* Estilo del mensaje de error */
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Estilo de la imagen QR */
+img {
+    margin-top: 20px;
+    max-width: 250px;
+}

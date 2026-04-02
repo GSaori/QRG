@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Título de la pestaña del navegador -->
+    <title>Generador de QR</title>
+
+    <!-- Conectamos el archivo CSS que está en static/css/estilos.css -->
+    <!-- url_for('static', filename='...') le dice a Flask dónde está el archivo -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Título principal de la página -->
+        <h1>Generador de QR</h1>
+
+        <!-- Pequeña instrucción para el usuario -->
+        <p>Escribe un texto o una URL para generar tu código QR.</p>
+
+        <!-- Este bloque solo aparece si Flask envía una variable llamada error -->
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- Formulario -->
+        <!-- action="/generar" significa que al enviarlo irá a esa ruta -->
+        <!-- method="POST" significa que mandará datos -->
+        <form action="/generar" method="POST">
+
+            <!-- Caja de texto donde el usuario escribe -->
+            <!-- name="contenido" debe coincidir con request.form.get("contenido") en app.py -->
+            <input type="text" name="contenido" placeholder="Escribe aquí..." required>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit">Generar QR</button>
+        </form>
+    </div>
+</body>
+</html>

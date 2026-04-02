@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Título de la pestaña -->
+    <title>Resultado QR</title>
+
+    <!-- Archivo de estilos -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Mensaje de éxito -->
+        <h1>QR generado correctamente</h1>
+
+        <!-- Mostramos el contenido que escribió el usuario -->
+        <p><strong>Contenido:</strong> {{ contenido }}</p>
+
+        <!-- Mostramos la imagen QR -->
+        <!-- url_for('mostrar_qr', nombre_archivo=qr_generado) llama a la ruta de Flask
+             que entrega el archivo desde la carpeta generated_qr -->
+        <img src="{{ url_for('mostrar_qr', nombre_archivo=qr_generado) }}" alt="QR generado">
+
+        <br><br>
+
+        <!-- Enlace para descargar el QR -->
+        <!-- El atributo download ayuda a que el navegador lo baje como archivo -->
+        <a href="{{ url_for('mostrar_qr', nombre_archivo=qr_generado) }}" download>
+            Descargar QR
+        </a>
+
+        <br><br>
+
+        <!-- Enlace para regresar al inicio -->
+        <a href="{{ url_for('inicio') }}">Generar otro QR</a>
+    </div>
+</body>
+</html>
