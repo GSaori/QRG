@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Permite usar caracteres especiales correctamente -->
     <meta charset="UTF-8">
 
-    <!-- Título de la pestaña -->
+    <!-- Título de la pestaña del navegador -->
     <title>Resultado QR</title>
 
-    <!-- Archivo de estilos -->
+    <!--
+        Carga el archivo de estilos desde la carpeta static/css.
+        url_for ayuda a Flask a construir la ruta correcta automáticamente.
+    -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
 </head>
 <body>
     <div class="contenedor">
-        <!-- Mensaje de éxito -->
+        <!-- Título principal -->
         <h1>QR generado correctamente</h1>
 
-        <!-- Mostramos el contenido que escribió el usuario -->
+        <!--
+            Mostramos el contenido convertido a QR.
+            En tu caso normalmente será el enlace de WhatsApp.
+        -->
         <p><strong>Contenido:</strong> {{ contenido }}</p>
 
-        <!-- Mostramos la imagen QR -->
-        <!-- url_for('mostrar_qr', nombre_archivo=qr_generado) llama a la ruta de Flask
-             que entrega el archivo desde la carpeta generated_qr -->
+        <!--
+            Mostramos la imagen del QR.
+            url_for('mostrar_qr', nombre_archivo=qr_generado)
+            llama a la ruta Flask que entrega el archivo desde generated_qr.
+        -->
         <img src="{{ url_for('mostrar_qr', nombre_archivo=qr_generado) }}" alt="QR generado">
 
         <br><br>
 
-        <!-- Enlace para descargar el QR -->
-        <!-- El atributo download ayuda a que el navegador lo baje como archivo -->
+        <!--
+            Enlace para descargar la imagen QR.
+            El atributo download ayuda a que el navegador la baje como archivo.
+        -->
         <a href="{{ url_for('mostrar_qr', nombre_archivo=qr_generado) }}" download>
             Descargar QR
         </a>
 
         <br><br>
 
-        <!-- Enlace para regresar al inicio -->
+        <!-- Enlace para volver a la página principal -->
         <a href="{{ url_for('inicio') }}">Generar otro QR</a>
     </div>
 </body>

@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Define que la página usa caracteres especiales como acentos y ñ -->
     <meta charset="UTF-8">
+
+    <!-- Título que aparece en la pestaña del navegador -->
     <title>QR de WhatsApp</title>
 </head>
 <body>
+    <!-- Título principal visible en la página -->
     <h1>Generador de QR para WhatsApp</h1>
 
+    <!--
+        Este bloque solo se muestra si Flask envía una variable llamada error.
+        Sirve para enseñar mensajes como:
+        "Por favor, escribe un número de WhatsApp."
+    -->
     {% if error %}
         <p style="color:red;">{{ error }}</p>
     {% endif %}
 
+    <!--
+        Formulario que enviará los datos a la ruta /generar-whatsapp
+        usando el método POST.
+    -->
     <form action="/generar-whatsapp" method="POST">
+
+        <!--
+            Campo para capturar el número de WhatsApp.
+            name="numero" debe coincidir con request.form.get("numero") en Flask.
+            required obliga al usuario a llenarlo.
+        -->
         <input type="text" name="numero" placeholder="Ejemplo: 5215512345678" required>
+
+        <!--
+            Campo opcional para escribir un mensaje.
+            name="mensaje" debe coincidir con request.form.get("mensaje") en Flask.
+        -->
         <input type="text" name="mensaje" placeholder="Mensaje opcional">
+
+        <!-- Botón para enviar el formulario -->
         <button type="submit">Generar QR</button>
     </form>
 </body>
