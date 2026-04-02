@@ -1,3 +1,47 @@
+from flask import Flask, render_template, request, send_from_directory
+from qr_logic import crear_qr, crear_link_whatsapp
+
+app = Flask(__name__)
+
+CARPETA_QR = "generated_qr"
+
+@app.route("/")
+def inicio():
+    return render_template("index.html")
+
+@app.route("/generar-whatsapp", methods=["POST"])
+def generar_whatsapp():
+    numero = request.form.get("numero", "").strip()
+    mensaje = request.form.get("mensaje", "").strip()
+
+    if not numero:
+        return render_template(
+            "index.html",
+            error="Por favor, escribe un número de WhatsApp."
+        )
+
+    try:
+        link_whatsapp = crear_link_whatsapp(numero, mensaje)
+        nombre_archivo = crear_qr(link_whatsapp, "qr_whatsapp.png")
+    except ValueError as e:
+        return render_template("index.html", error=str(e))
+    except Exception as e:
+        return f"Error interno: {e}"
+
+    return render_template(
+        "resultado.html",
+        qr_generado=nombre_archivo,
+        contenido=link_whatsapp
+    )
+
+@app.route("/qr/<nombre_archivo>")
+def mostrar_qr(nombre_archivo):
+    return send_from_directory(CARPETA_QR, nombre_archivo)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+"""
 # Importamos Flask y algunas herramientas que vamos a usar:
 # - Flask: crea la aplicación web
 # - render_template: sirve para mostrar archivos HTML
@@ -77,3 +121,5 @@ if __name__ == "__main__":
     # - recarga automáticamente si guardas cambios
     # - muestra errores más detallados
     app.run(debug=True)
+
+"""
